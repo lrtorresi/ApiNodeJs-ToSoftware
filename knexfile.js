@@ -5,10 +5,10 @@ module.exports = {
   development: {
     client: 'mysql',
     connection: {
-      host : '127.0.0.1',
-      user : 'root',
-      password : '',
-      database : 'toSoftware'
+      host : 'tosoftware.cq6kmgwubsnt.us-east-1.rds.amazonaws.com',
+      user : 'admin',
+      password : '1q2w3e$%',
+      database : 'ToSoftware'
     },
     migrations: {
       directory: './src/database/migrations'

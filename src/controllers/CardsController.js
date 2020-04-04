@@ -11,7 +11,7 @@ module.exports = {
         const user_uuid = request.headers.authorization;
 
         //Retornar o ID do Card Criado
-        const [id] = await connection('card').insert({
+        const [id] = await connection('Card').insert({
             title, description, value, photo, user_uuid,
         });
         return response.json({ id });
@@ -19,7 +19,7 @@ module.exports = {
 
     //Select All Cards
     async getAllCArds(request, response) {
-        const cards = await connection('card').select('*');
+        const cards = await connection('Card').select('*');
         return response.json(cards);
     },
 
@@ -29,7 +29,7 @@ module.exports = {
         const user_uuid = request.headers.authorization; //pegando o ID do usuario na Header
 
         //Verificando se o ID do Card é do usario logado
-        const card = await connection('card')
+        const card = await connection('Card')
             .where('id', id)
             .select('user_uuid')
             .first();
@@ -38,7 +38,7 @@ module.exports = {
             return response.status(401).json({ error: 'Operação não permitida' });
         }
 
-        await connection('card').where('id', id).delete();
+        await connection('Card').where('id', id).delete();
         return response.status(202).json({msg: 'Card excluido com sucesso!'});
     },
 

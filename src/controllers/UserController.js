@@ -11,7 +11,7 @@ module.exports = {
         const { Nome, Cpf, Email, Password } = request.body;
 
         //Verificando se o e-mail já esta cadastrado
-        const emailUser = await connection('user')
+        const emailUser = await connection('User')
             .where('Email', Email)
             .orWhere('Cpf', Cpf)
             .select('Nome')
@@ -21,7 +21,7 @@ module.exports = {
             return response.status(401).json({ error: 'Operação não permitida! Usuario já cadastrados.' });
         }
         //usuario não encontrado e vai cadastrar
-        await connection('user').insert({
+        await connection('User').insert({
             Uuid, Nome, Cpf, Email, Password,
         })
         return response.json({ Uuid, Nome, Cpf });
@@ -29,7 +29,7 @@ module.exports = {
 
     //Select All User
     async getAllUser(request, response) {
-        const users = await connection('user').select('*');
+        const users = await connection('User').select('*');
         return response.json(users);
     },
 };
